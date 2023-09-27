@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Functional Website</title>
+
+</head>
+
+<body>
+
+    <%- include("partials/header.ejs") %>
+
+        <!-- FORM -->
+        <div class="form-container">
+            <form class="styled-form" action="/" method="post">
+                <h2>Meal and Cocktails</h2>
+                <fieldset>
+                    <legend>Meal</legend>
+                    <div class="form-group">
+                        <label for="dietType">Diet Type:</label>
+                        <input type="text" id="dietType" name="dietType" placeholder="Enter meal name" autofocus>
+                        <a href="https://spoonacular.com/food-api/docs#Diets" target="_blank">Supported Diets</a>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="nationality">Cuisine:</label>
+                        <input type="text" id="nationality" name="nationality" placeholder="Enter nationality">
+                        <a href="https://spoonacular.com/food-api/docs#Cuisines" target="_blank">Supported Cuisines</a>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Cocktail</legend>
+                    <div class="form-group">
+                        <label for="cocktailName">Cocktail Name:</label>
+                        <input type="text" id="cocktailName" name="cocktailName" placeholder="Enter name of Cocktail">
+                        <p style="font-size: smaller;">(DONT ENTER ANYTHING FOR A SURPRISE)</p>
+                    </div>
+                </fieldset>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+
+        <!-- OUTPUT AREA -->
+        <section class="meal-section">
+            <div class="meal-content">
+
+                <% if(locals.food){ %>
+                <div class="meal-details">
+                    <div class="meal-image">
+                        <!-- meal image -->
+                        <img src="<%= food.image  %>" alt="Food Image">
+                    </div>
+                    <h2>
+                        <!-- meal name -->
+                        <%= food.title %>
+                    </h2>
+                    <p class="recipe">
+                        <!-- meal recipe -->
+                        <h3>Instructions</h3>
+                        <p class="instructions">
+                            <%- food.instructions  %>
+                        </p>
+                    </p>
+                    <div class="youtube-link">
+                        <a href=<%= food.sourceUrl%> target="_blank">Get Details</a>
+                    </div>
+                </div>
+                <% } %>
+
+                <% if(locals.cocktail){ %>
+                    <div class="meal-details">
+                        <div class="meal-image">
+                            <!-- cocktail image -->
+                            <img src="<%= cocktail.strDrinkThumb%>" alt="Cocktail Image">
+                        </div>
+                        <h2>
+                            <!-- cocktail name -->
+                            <%= cocktail.strDrink %>
+                        </h2>
+                        <p class="recipe">
+                            <!-- cocktail recipe  insgredients and instructions-->
+                            <h3>Ingredients:</h3>
+                            <p class="ingredients">
+                                <% for(let i=0;i<cocktailIngredients.length;i++){ 
+                                    if(cocktailIngredients[i]!=null) {
+                                %>
+                                    <span>♦<%= cocktailIngredients[i]%></span> 
+                                <%} }%>
+                            </p>
+                            <h3>Instructions:</h3>
+                            <p class="instructions">
+                                <%= cocktail.strInstructions  %>
+                            </p>
+                        </p>
+                    </div>
+                <% } %>
+            </div>
+        </section>
+
+        <%- include("partials/footer.ejs") %>
+
+</body>
+
+</html>

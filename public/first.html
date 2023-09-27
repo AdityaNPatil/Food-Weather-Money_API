@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Functional Website</title>
+    <link rel="stylesheet" href="./styles/main.css">
+
+</head>
+
+<body>
+
+    <!-- NAV BAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Food</a></li>
+            <li><a href="#">Weather</a></li>
+            <li><a href="#">Money</a></li>
+        </ul>
+    </nav>
+
+    <!-- FORM -->
+    <div class="form-container">
+        <form class="styled-form" action="/" method="post">
+            <h2>Meal and Cocktails</h2>
+            <fieldset>
+                <legend>Meal</legend>
+                <div class="form-group">
+                    <label for="mealName">Meal Name:</label>
+                    <input type="text" id="mealName" name="mealName" placeholder="Enter meal name" autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="nationality">Nationality:</label>
+                    <input type="text" id="nationality" name="nationality" placeholder="Enter nationality">
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Cocktail</legend>
+                <div class="form-group">
+                    <label for="cocktailName">Cocktail Name:</label>
+                    <input type="text" id="cocktailName" name="cocktailName" placeholder="Enter name of Cocktail">
+                </div>
+                <div class="form-group">
+                    <label for="alcholicOrNot">Alchoholic?:</label>
+                    <select name="alcholicOrNot" id="alcholicOrNot">
+                        <option value="Alcholic">Yes</option>
+                        <option value="Non_Alcoholic">No</option>
+                    </select>
+                </div>
+            </fieldset>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- OUTPUT AREA -->
+    <section class="meal-section">
+        <div class="meal-content">
+            <div class="meal-image">
+                <img src="meal_image.jpg" alt="Meal Image">
+            </div>
+            <div class="meal-details">
+                <h2>Delicious Meal Name</h2>
+                <p class="recipe">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vestibulum felis eu
+                    nibh varius, ut vestibulum odio fringilla.</p>
+                <div class="youtube-link">
+                    <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank">Watch on YouTube</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <section id="contact">
+        <div id="contact-section-title" class="headingall">Get In Touch</div>
+        <p id="contact-text">If You love designing, gaming or developing feel free to reach out. We can code while we game.</p>
+
+        <div id="contact-profiles">
+            <li><a href="mailto:adityapatil2708@gmail.com" target="_blank"><img src="./images/icons8-gmail.svg" alt="gmail"></a></li>
+            <li><a href="https://www.instagram.com/adityapatil_27/# " target="_blank"><img src="./images/icons8-instagram.svg" alt="insta"></a></li>
+            <li><a href="https://linkedin.com/in/aditya-p-986955237" target="_blank"><img src="./images/icons8-linkedin.svg" alt="linkedin"></a></li>
+            <li><a href="https://github.com/AdityaP2708" target="_blank"><img src="./images/icons8-github.svg" alt="github"></a></li>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy;Aditya Patil @ AditypaP2708.</p>
+    </footer>
+
+</body>
+
+</html>
