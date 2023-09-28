@@ -8,34 +8,19 @@
 
 </head>
 
-<body>
+<body id="weather-body">
 
     <%- include("partials/header.ejs") %>
 
         <!-- FORM -->
         <div class="form-container">
-            <form class="styled-form" action="/" method="post">
-                <h2>Meal and Cocktails</h2>
+            <form class="styled-form" action="/weather" method="post">
+                <h2>Weather and Location</h2>
                 <fieldset>
-                    <legend>Meal</legend>
+                    <legend>City</legend>
                     <div class="form-group">
-                        <label for="dietType">Diet Type:</label>
-                        <input type="text" id="dietType" name="dietType" placeholder="Enter meal name" autofocus>
-                        <a href="https://spoonacular.com/food-api/docs#Diets" target="_blank">Supported Diets</a>
-                        
-                    </div>
-                    <div class="form-group">
-                        <label for="nationality">Cuisine:</label>
-                        <input type="text" id="nationality" name="nationality" placeholder="Enter nationality">
-                        <a href="https://spoonacular.com/food-api/docs#Cuisines" target="_blank">Supported Cuisines</a>
-                    </div>
-                </fieldset>
-                <fieldset>
-                    <legend>Cocktail</legend>
-                    <div class="form-group">
-                        <label for="cocktailName">Cocktail Name:</label>
-                        <input type="text" id="cocktailName" name="cocktailName" placeholder="Enter name of Cocktail">
-                        <p style="font-size: smaller;">(DONT ENTER ANYTHING FOR A SURPRISE)</p>
+                        <label for="cityName">City Name:</label>
+                        <input type="text" id="cityName" name="cityName" placeholder="Enter the name of your city" autofocus required>
                     </div>
                 </fieldset>
                 <button type="submit">Submit</button>
@@ -44,7 +29,63 @@
 
 
         <!-- OUTPUT AREA -->
-        
+        <section class="weather-output">
+            <% if(locals.city){ %>
+            <h2>
+                <%= city  %> 7 Day - Weather Forecast
+            </h2>
+            <% } %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Max Temperature (°C)</th>
+                        <th>Min Temperature (°C)</th>
+                        <th>Sunrise</th>
+                        <th>Sunset</th>
+                        <th>UV Index Max</th>
+                        <th>Rain Sum (mm)</th>
+                        <th>Max Windspeed (km/h)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(locals.daily){ %>
+                        <% for (let i=0; i < daily.time.length; i++) { %>
+                            <tr>
+                                <td>
+                                    <%= daily.time[i] %>
+                                </td>
+                                <td>
+                                    <%= daily.temperature_2m_max[i] %>
+                                </td>
+                                <td>
+                                    <%= daily.temperature_2m_min[i] %>
+                                </td>
+                                <td>
+                                    <%= daily.sunrise[i] %>
+                                </td>
+                                <td>
+                                    <%= daily.sunset[i] %>
+                                </td>
+                                <td>
+                                    <%= daily.uv_index_max[i] %>
+                                </td>
+                                <td>
+                                    <%= daily.rain_sum[i] %>
+                                </td>
+                                <td>
+                                    <%= daily.windspeed_10m_max[i] %>
+                                </td>
+                            </tr>
+                        <% } %>
+                    <% } else{ %>
+                            <tr>
+                                <td colspan="8">Enter Location To Receive Data</td>
+                            </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </section>
 
         <%- include("partials/footer.ejs") %>
 
