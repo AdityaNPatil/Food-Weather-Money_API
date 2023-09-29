@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Data</title>
+</head>
+
+<body id="stock-body">
+    <%- include("partials/header.ejs") %>
+
+        <div class="data-container">
+            <h1>Stock Market Data</h1>
+            <form action="/stock" method="post">
+
+                <div class="input-group">
+                    <label for="stockSymbol" style="font-size: 1.5rem;">Enter Stock Symbol:</label>
+                    <input type="text" id="stockSymbol" name="stockSym" placeholder="e.g., AAPL">
+                </div>
+                <input type="submit" class="stock-btn" value="Stock Data">
+            </form>
+
+            <% if(locals.stock){ %>
+                <div class="output">
+
+                    <h2>Stock Information:</h2>
+                    <p>Symbol:
+                        <span id="symbol">
+                            <%= stock.symbol %>
+                        </span>
+                    </p>
+                    
+                    <p>Name:
+                        <span id="name">
+                            <%= stock.name %>
+                        </span>
+                    </p>
+                    <p>Time:
+                        <span id="time">
+                            <%= stock.time  %>
+                        </span>
+                    </p>
+                    <p>Open: $
+                        <span class="price">
+                            <%= stock.open %>
+                        </span>
+                    </p>
+                    <p>High: $
+                        <span class="price">
+                            <%= stock.high %>
+                        </span>
+                    </p>
+                    <p>Low: $
+                        <span class="price">
+                            <%= stock.low %>
+                        </span>
+                    </p>
+                    <p>Close: $
+                        <span class="price">
+                            <%= stock.close %>
+                        </span>
+                    </p>
+                    <p>Volume:
+                        <span class="price">
+                            <%= stock.volume %>
+                        </span>
+                    </p>
+                    <% }else{ %>
+                        <p>Enter Stock Symbol to Get Insights</p>
+                        <% } %>
+                </div>
+        </div>
+
+        <%- include("partials/footer.ejs") %>
+</body>
+
+</html>

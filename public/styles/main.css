@@ -379,3 +379,115 @@ th{
     background-color: #444;
     width:12.5%;
 }
+
+
+/* STOCKS */
+#stock-body {
+     /* Replace with your background image URL */
+    color: white;
+    font-family: Arial, sans-serif;
+    position: relative;
+    /* align-items: ; */
+    min-height:100vh;
+    overflow-x: hidden;
+}
+#stock-body::before{
+    content: "";
+    background: url('../images/stockbg.jpg') no-repeat center center/cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -4;
+    height: 100%;
+    width: 100%;
+}
+
+.data-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.data-container form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 10px;
+
+    background-color: #003144dd;
+    border-radius: 20px;
+    padding: 20px;
+
+    border-top: 4px solid #005fa8;
+}
+
+.output{
+    position: relative;
+    border-radius: 20px;
+    text-align: center;
+    color: #ffffff;
+
+    width: 60%;
+}
+
+.output::before{
+    content: "";
+    background: #9e9e9e no-repeat center center/cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    opacity: 0.8;
+    filter: blur(2px);
+    border-radius: 20px;
+    border-top: 4px solid #cfcfcf;
+}
+
+.output h2{
+    color:#09ff00;
+    text-decoration: underline;
+    font-variant: small-caps;
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.output p span{
+    color:#6fff00;
+    font-size: 1.3rem;
+}
+
+.input-group {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 90%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.stock-btn {
+    display: block;
+    width: 50%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.stock-btn:hover {
+    background-color: #0056b3;
+}

@@ -9,7 +9,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
-// 🚩BASE URL FOR FOOD 
+// 🚩BASE URL FOR FOOD -- SPOONACULAR
 const foodURL = "https://api.spoonacular.com/recipes";
 // 🚩 API KEY FOR FOOD
 const configFood = {
@@ -18,16 +18,20 @@ const configFood = {
     }
 }
 
-// 🚩BASE URL FOR COCKTAIL
+// 🚩BASE URL FOR COCKTAIL -- COCKTAIL DB
 const cocktailURL = "https://www.thecocktaildb.com/api/json/v1/1";
 
-// 🚩 BASE URL FOR LATITUDE AND LONGITUDE
+// 🚩 BASE URL FOR LATITUDE AND LONGITUDE -- OPENWEATHER GEOCODING
 const latLongURL = "http://api.openweathermap.org/geo/1.0/direct";
 
-// 🚩 BASE URL FOR WEATHER INFO
+// 🚩 BASE URL FOR WEATHER INFO -- OPENMETEO
 const weatherURL = "https://api.open-meteo.com/v1/forecast";
 
-// 🚩1st time user opens website -- GET REQUEST
+// 🚩 BASE URL STOKCS -- Alpha Vantage API endpoint
+const StockURL = 'https://www.alphavantage.co/query';
+const StockAPI = '6UXIN5Y7LSADJ1LG';
+
+// 🚩 1st time user opens website -- GET REQUEST
 app.get('/', (req, res) => {
     res.render('food.ejs');
 });
@@ -150,6 +154,58 @@ app.post("/weather", async (req, res) => {
     }
     catch (error) {
         res.render('error.ejs', { errorMessage: error.message });
+    }
+});
+
+// 🚩 STOCKS
+app.get("/stock",(req, res) => {
+    res.render('stock.ejs');
+});
+
+
+// ◘◘Route to get stock market data
+app.post('/stock', async (req, res) => {
+    try {
+        // Make an API request to Alpha Vantage to get stock market data
+        const response = await axios.get(StockURL, {
+            params: {
+                function: 'TIME_SERIES_INTRADAY',
+                symbol: req.body["stockSym"], // Replace with the desired stock symbol
+                interval: '1min',
+                apikey: StockAPI
+            }
+        });
+
+        // Assuming the API response contains data in a format like this:
+        const metaData = response.data['Meta Data'];
+        const timeSeriesData = response.data['Time Series (1min)'];
+        // 🚩 GETTING 1ST KEY SET FROM AN OBJECT...
+        /*
+        Object.keys(timeSeriesData): This retrieves an array of keys (timestamps) from the timeSeriesData object.
+
+        [0]: Accesses the first key (timestamp) in the array, which typically represents the most recent data point.
+        */ 
+        const latestData = timeSeriesData[Object.keys(timeSeriesData)[0]];
+
+        const stockData = {
+            symbol: metaData['2. Symbol'],
+            name: metaData['1. Information'],
+            time : Object.keys(timeSeriesData)[0],
+            open: (latestData['1. open']),
+            high: (latestData['2. high']),
+            low: (latestData['3. low']),
+            close: (latestData['4. close']),
+            volume: (latestData['5. volume']),
+        };
+
+        console.log(Object.keys(timeSeriesData)[0]);
+
+        // Render the EJS template with the stock data
+        res.render('stock.ejs', { stock: stockData });
+    } 
+    catch (error) {
+        console.error('Error fetching stock data:', error);
+        res.render("error.ejs",{errorMessage:"Error fetching stock data"})
     }
 });
 
