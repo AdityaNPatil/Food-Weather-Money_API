@@ -14,7 +14,7 @@ const foodURL = "https://api.spoonacular.com/recipes";
 // 🚩 API KEY FOR FOOD
 const configFood = {
     params: {
-        apiKey: "f3f95611d3904d8db52cd15f4656088c",
+        apiKey: "OWN_API_KEY for spoonacular",
     }
 }
 
@@ -29,7 +29,7 @@ const weatherURL = "https://api.open-meteo.com/v1/forecast";
 
 // 🚩 BASE URL STOKCS -- Alpha Vantage API endpoint
 const StockURL = 'https://www.alphavantage.co/query';
-const StockAPI = '6UXIN5Y7LSADJ1LG';
+const StockAPI = 'OWN_API_KEY for alphavantage';
 
 // 🚩 1st time user opens website -- GET REQUEST
 app.get('/', (req, res) => {
@@ -117,7 +117,7 @@ app.post("/weather", async (req, res) => {
     const configLatLong = {
         params: {
             q: req.body["cityName"], //key to get name of location
-            appid: "aff88fd81258b31cd167064e2d70761b"  //api key with documentation named key
+            appid: "OWN_API_KEY for latitude longitude api"  //api key with documentation named key
         }
     };
 
